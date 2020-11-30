@@ -1,20 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class mover : MonoBehaviour
-{
-    float speed = 5f;
+/**
+ * This component moves its object in a fixed velocity.
+ * NOTE: velocity is defined as speed+direction.
+ *       speed is a number; velocity is a vector.
+ */
+public class Mover: MonoBehaviour {
+    [Tooltip("Movement vector in meters per second")]
+    [SerializeField] Vector3 velocity;
 
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.UpArrow))
-            transform.position += new Vector3(0,speed * Time.deltaTime,0);
-        else if (Input.GetKey(KeyCode.DownArrow))
-            transform.position += new Vector3(0,-speed * Time.deltaTime,0);
-        else if (Input.GetKey(KeyCode.RightArrow))
-            transform.position += new Vector3(speed * Time.deltaTime,0,0);
-        else if (Input.GetKey(KeyCode.LeftArrow))
-            transform.position += new Vector3(-speed * Time.deltaTime,0,0);
+    void Update() {
+        transform.position += velocity * Time.deltaTime;
+    }
+
+    public void SetVelocity(Vector3 newVelocity) {
+        this.velocity = newVelocity;
     }
 }
